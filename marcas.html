@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Marcas | Cuevas Automóviles · Trinidad, Uruguay</title>
+  <meta name="description" content="Marcas oficiales en Cuevas Automóviles Trinidad: JAC, Mitsubishi, Chery, Fiat (autos), Trek y Trink eléctricas (bicicletas), Honda y Mercury (motores náuticos), Siux (embarcaciones). 36 años de trayectoria en Flores, Uruguay.">
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    /* ── LOGO CARDS ──────────────────────────────────────── */
+    .brand-section-title {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin: 60px 0 32px;
+      padding-bottom: 16px;
+      border-bottom: 2px solid var(--light-alt, #eee);
+    }
+    .brand-section-title .label {
+      font-size: .72rem;
+      font-weight: 800;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--red);
+      background: rgba(200,16,46,.08);
+      padding: 4px 12px;
+      border-radius: 20px;
+      white-space: nowrap;
+    }
+    .brand-section-title h2 {
+      font-size: 1.35rem;
+      margin: 0;
+      color: var(--navy);
+    }
+
+    .logo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 24px;
+      margin-bottom: 8px;
+    }
+    .logo-card {
+      background: #fff;
+      border: 1.5px solid #eaecf0;
+      border-radius: 18px;
+      padding: 32px 24px 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 16px;
+      transition: transform .2s, box-shadow .2s, border-color .2s;
+      text-decoration: none;
+      color: inherit;
+    }
+    .logo-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 36px rgba(0,0,0,.10);
+      border-color: var(--red);
+    }
+    .logo-card .logo-img-wrap {
+      width: 120px;
+      height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .logo-card .logo-img-wrap img {
+      max-width: 120px;
+      max-height: 75px;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+    }
+    /* CSS text logo fallback */
+    .logo-text {
+      font-size: 1.9rem;
+      font-weight: 900;
+      letter-spacing: -.03em;
+      color: var(--navy);
+      line-height: 1;
+    }
+    .logo-card h3 {
+      font-size: 1.05rem;
+      margin: 0;
+      color: var(--navy);
+    }
+    .logo-card p {
+      font-size: .84rem;
+      color: var(--grey-dark, #666);
+      margin: 0;
+      line-height: 1.5;
+    }
+    .logo-card .card-link {
+      font-size: .8rem;
+      font-weight: 700;
+      color: var(--red);
+      letter-spacing: .04em;
+    }
+
+    /* ── PHOTO GALLERY ───────────────────────────────────── */
+    .local-gallery {
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      grid-template-rows: auto auto;
+      gap: 16px;
+      margin-top: 48px;
+    }
+    .local-gallery .main-photo {
+      grid-column: 1 / -1;
+      border-radius: 18px;
+      overflow: hidden;
+      height: 380px;
+    }
+    .local-gallery .side-photo {
+      border-radius: 18px;
+      overflow: hidden;
+      height: 240px;
+    }
+    .local-gallery img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform .5s ease;
+    }
+    .local-gallery .main-photo:hover img,
+    .local-gallery .side-photo:hover img {
+      transform: scale(1.04);
+    }
+
+    @media (max-width: 600px) {
+      .local-gallery { grid-template-columns: 1fr; }
+      .local-gallery .main-photo { height: 240px; }
+      .local-gallery .side-photo { height: 200px; }
+      .logo-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 14px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav id="navbar" class="solid">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <img src="2.png" alt="Cuevas Logo">
+      <div class="nav-logo-text">
+        <span class="brand">CUEVAS</span>
+        <span class="tagline">Automóviles · Trinidad</span>
+      </div>
+    </a>
+    <div class="nav-links">
+      <a href="index.html">Inicio</a>
+      <a href="catalogo.html">Catálogo</a>
+      <a href="marcas.html" class="active">Marcas</a>
+      <a href="servicios.html">Servicios</a>
+      <a href="nosotros.html">Nosotros</a>
+      <a href="contacto.html">Contacto</a>
+    </div>
+    <div class="nav-cta">
+      <a href="tel:+59846343775" class="btn btn-outline btn-sm">📞 Llamar</a>
+      <a href="https://wa.me/59899364330" target="_blank" class="btn btn-primary btn-sm">WhatsApp</a>
+    </div>
+    <button id="hamburger" class="nav-hamburger" aria-label="Menú">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+<div id="mobileNav" class="mobile-nav">
+  <a href="index.html">🏠 Inicio</a>
+  <a href="catalogo.html">🚗 Catálogo</a>
+  <a href="marcas.html">🏷️ Marcas</a>
+  <a href="servicios.html">🔧 Servicios</a>
+  <a href="nosotros.html">👥 Nosotros</a>
+  <a href="contacto.html">📍 Contacto</a>
+  <a href="https://wa.me/59899364330" target="_blank" class="btn btn-primary">💬 WhatsApp</a>
+</div>
+
+<!-- HEADER -->
+<div class="about-header">
+  <div class="container" style="position:relative;z-index:1">
+    <div class="breadcrumb">
+      <a href="index.html">Inicio</a>
+      <span class="sep">›</span>
+      <span class="current">Marcas</span>
+    </div>
+    <div class="section-label" style="color:rgba(200,16,46,.9)">Representaciones Oficiales</div>
+    <h1>Las marcas de Cuevas Automóviles</h1>
+    <p>Más de <strong>36 años</strong> en Trinidad nos respaldan. Autos, bicicletas y náutica de las mejores marcas del mundo, con el servicio cercano que merecés.</p>
+  </div>
+</div>
+
+<!-- BRANDS CONTENT -->
+<section class="section">
+  <div class="container">
+
+    <!-- ── AUTOMÓVILES ──────────────────────────────────── -->
+    <div class="brand-section-title">
+      <span class="label">🚗 Automóviles</span>
+      <h2>Marcas de vehículos nuevos y usados</h2>
+    </div>
+
+    <div class="logo-grid">
+
+      <!-- JAC -->
+      <a href="catalogo.html?brand=JAC" class="logo-card animate-on-scroll">
+        <div class="logo-img-wrap">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/JAC.svg/300px-JAC.svg.png"
+               alt="JAC Motors logo"
+               onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+          <span class="logo-text" style="display:none">JAC</span>
+        </div>
+        <h3>JAC Motors</h3>
+        <p>Vehículos chinos de alta calidad. SUVs, sedanes y utilitarios con tecnología moderna y excelente relación precio-valor.</p>
+        <span class="card-link">Ver vehículos JAC →</span>
+      </a>
+
+      <!-- Mitsubishi -->
+      <a href="catalogo.html?brand=Mitsubishi" class="logo-card animate-on-scroll delay-1">
+        <div class="logo-img-wrap">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/Mitsubishi_logo.svg/250px-Mitsubishi_logo.svg.png"
+               alt="Mitsubishi Motors logo"
+               onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+          <span class="logo-text" style="display:none">◇◇◇</span>
+        </div>
+        <h3>Mitsubishi</h3>
+        <p>Japonesa de renombre mundial. L200, ASX, Eclipse Cross y Outlander. Robustez y tecnología de punta en cada modelo.</p>
+        <span class="card-link">Ver vehículos Mitsubishi →</span>
+      </a>
+
+      <!-- Chery -->
+      <a href="catalogo.html?brand=Chery" class="logo-card animate-on-scroll delay-2">
+        <div class="logo-img-wrap">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/Chery_logo_2013.svg/250px-Chery_logo_2013.svg.png"
+               alt="Chery logo"
+               onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+          <span class="logo-text" style="display:none;color:#c8102e">CHERY</span>
+        </div>
+        <h3>Chery</h3>
+        <p>Marca china con fuerte presencia en Uruguay. Arrizo y Tiggo con equipamiento completo, garantía y repuestos disponibles.</p>
+        <span class="card-link">Ver vehículos Chery →</span>
+      </a>
+
+      <!-- Fiat -->
+      <a href="catalogo.html?brand=Fiat" class="logo-card animate-on-scroll delay-3">
+        <div class="logo-img-wrap">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Logo_fiat_2020.svg/200px-Logo_fiat_2020.svg.png"
+               alt="Fiat logo"
+               onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+          <span class="logo-text" style="display:none">FIAT</span>
+        </div>
+        <h3>Fiat</h3>
+        <p>La marca italiana más popular de América del Sur. Pulse, Cronos, Argo y Fastback. Versátil, accesible y muy confiable.</p>
+        <span class="card-link">Ver vehículos Fiat →</span>
+      </a>
+
+    </div><!-- /logo-grid autos -->
+
+    <!-- ── BICICLETAS ───────────────────────────────────── -->
+    <div class="brand-section-title">
+      <span class="label">🚲 Bicicletas</span>
+      <h2>Bicicletas de ruta, MTB y eléctricas</h2>
+    </div>
+
+    <div class="logo-grid">
+
+      <!-- Trek -->
+      <a href="https://wa.me/59899364330?text=Hola!%20Me%20interesan%20las%20bicicletas%20Trek" target="_blank" class="logo-card animate-on-scroll">
+        <div class="logo-img-wrap">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Trek_Bicycle_Corporation_logo.svg/300px-Trek_Bicycle_Corporation_logo.svg.png"
+               alt="Trek Bicycles logo"
+               onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+          <span class="logo-text" style="display:none;color:#000">TREK</span>
+        </div>
+        <h3>Trek</h3>
+        <p>Una de las mejores marcas de bicicletas del mundo. Modelos urbanos, de ruta, MTB y eléctricas con tecnología de primera.</p>
+        <span class="card-link">Consultar disponibilidad →</span>
+      </a>
+
+      <!-- Trink -->
+      <a href="https://wa.me/59899364330?text=Hola!%20Me%20interesan%20las%20bicicletas%20Trink" target="_blank" class="logo-card animate-on-scroll delay-1">
+        <div class="logo-img-wrap">
+          <img src="trink bicicletas.PNG"
+               alt="Trink Bicicletas logo"
+               onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+          <span class="logo-text" style="display:none;color:#1a7a3c">TRINK</span>
+        </div>
+        <h3>Trink</h3>
+        <p>Bicicletas de calidad especialmente pensadas para el interior del Uruguay. Diseño cómodo, durabilidad y buen precio.</p>
+        <span class="card-link">Consultar disponibilidad →</span>
+      </a>
+
+      <!-- E-Bikes -->
+      <div class="logo-card animate-on-scroll delay-2" style="background:linear-gradient(135deg,#f0fff4,#e8f5e9)">
+        <div class="logo-img-wrap">
+          <span style="font-size:3.5rem">⚡</span>
+        </div>
+        <h3>Bicicletas Eléctricas</h3>
+        <p>Modelos eléctricos Trek y Trink con batería de largo alcance. Perfectas para la ciudad y para quienes buscan movilidad sustentable.</p>
+        <a href="https://wa.me/59899364330?text=Hola!%20Me%20interesan%20las%20bicicletas%20el%C3%A9ctricas" target="_blank" class="card-link">Consultar stock →</a>
+      </div>
+
+    </div><!-- /logo-grid bikes -->
+
+    <!-- ── NÁUTICA ───────────────────────────────────────── -->
+    <div class="brand-section-title">
+      <span class="label">⚓ Náutica</span>
+      <h2>Motores y embarcaciones</h2>
+    </div>
+
+    <div class="logo-grid">
+
+      <!-- Honda Marine -->
+      <a href="https://wa.me/59899364330?text=Hola!%20Me%20interesan%20los%20motores%20Honda%20n%C3%A1uticos" target="_blank" class="logo-card animate-on-scroll">
+        <div class="logo-img-wrap">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Honda_Logo.svg/250px-Honda_Logo.svg.png"
+               alt="Honda Marine logo"
+               onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+          <span class="logo-text" style="display:none;color:#cc0001">Honda</span>
+        </div>
+        <h3>Honda Marine</h3>
+        <p>Motores fuera de borda Honda. Reconocidos mundialmente por su confiabilidad, bajo consumo y durabilidad excepcional.</p>
+        <span class="card-link">Consultar disponibilidad →</span>
+      </a>
+
+      <!-- Mercury Marine -->
+      <a href="https://wa.me/59899364330?text=Hola!%20Me%20interesan%20los%20motores%20Mercury%20n%C3%A1uticos" target="_blank" class="logo-card animate-on-scroll delay-1">
+        <div class="logo-img-wrap">
+          <img src="https://upload.wikimedia.org/wikipedia/en/thumb/c/c9/Mercury_Marine_logo.svg/250px-Mercury_Marine_logo.svg.png"
+               alt="Mercury Marine logo"
+               onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+          <span class="logo-text" style="display:none;color:#0a1628">Mercury</span>
+        </div>
+        <h3>Mercury Marine</h3>
+        <p>Líder mundial en motores náuticos. Potencia, tecnología y rendimiento para todo tipo de embarcación.</p>
+        <span class="card-link">Consultar disponibilidad →</span>
+      </a>
+
+      <!-- Siux -->
+      <a href="https://wa.me/59899364330?text=Hola!%20Me%20interesan%20las%20embarcaciones%20Siux" target="_blank" class="logo-card animate-on-scroll delay-2">
+        <div class="logo-img-wrap">
+          <span style="font-size:3.2rem">⛵</span>
+        </div>
+        <h3>Siux</h3>
+        <p>Embarcaciones Siux de gran calidad. También contamos con lanchas, canobotes y kayaks para todo tipo de aventura acuática.</p>
+        <span class="card-link">Consultar embarcaciones →</span>
+      </a>
+
+    </div><!-- /logo-grid nautica -->
+
+    <!-- ── GALERÍA DEL LOCAL ─────────────────────────────── -->
+    <div class="brand-section-title" style="margin-top:80px">
+      <span class="label">📸 Nuestro local</span>
+      <h2>Visitanos en Inés Duran 1181, Trinidad</h2>
+    </div>
+
+    <div class="local-gallery animate-on-scroll">
+      <div class="main-photo">
+        <img src="foto frente local.PNG" alt="Frente del local Cuevas Automóviles Trinidad">
+      </div>
+      <div class="side-photo">
+        <img src="foto frente local 2.PNG" alt="Cuevas Automóviles Trinidad - fachada">
+      </div>
+      <div class="side-photo">
+        <img src="foto local interior.PNG" alt="Interior del local Cuevas Automóviles">
+      </div>
+    </div>
+
+    <p style="text-align:center;margin-top:24px;color:var(--grey-dark);font-size:.9rem">
+      📍 Inés Duran 1181, Trinidad, Flores, Uruguay — 
+      <a href="https://maps.google.com/?q=Inés+Duran+1181+Trinidad+Flores+Uruguay" target="_blank" style="color:var(--red);font-weight:600">Ver en Google Maps →</a>
+    </p>
+
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-banner">
+  <div class="container">
+    <div class="cta-inner">
+      <div class="cta-text animate-on-scroll">
+        <h2>¿Buscás una marca o modelo en particular?</h2>
+        <p>Más de 36 años nos respaldan. Si no encontrás lo que buscás, contanos y lo conseguimos para vos.</p>
+      </div>
+      <div class="cta-actions animate-on-scroll delay-1">
+        <a href="https://wa.me/59899364330?text=Hola!%20Busco%20un%20veh%C3%ADculo%20de%20una%20marca%20espec%C3%ADfica" target="_blank" class="btn btn-primary btn-lg">💬 Consultar por WhatsApp</a>
+        <a href="catalogo.html" class="btn btn-outline btn-lg">🚗 Ver catálogo</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <img src="logo.PNG" alt="Cuevas Automóviles Logo" class="footer-logo" style="height:60px;filter:brightness(0) invert(1);margin-bottom:20px">
+          <p class="desc">Más de 36 años en Trinidad, Flores. Autos JAC, Mitsubishi, Chery y Fiat · Bicicletas Trek y Trink · Náutica Honda y Mercury · Lavadero · Financiación propia.</p>
+        </div>
+        <div class="footer-col"><h4>Marcas</h4><ul>
+          <li><a href="#" onclick="return false">JAC Motors</a></li>
+          <li><a href="#" onclick="return false">Mitsubishi</a></li>
+          <li><a href="#" onclick="return false">Chery</a></li>
+          <li><a href="#" onclick="return false">Fiat</a></li>
+          <li><a href="#" onclick="return false">Trek / Trink</a></li>
+          <li><a href="#" onclick="return false">Honda / Mercury</a></li>
+        </ul></div>
+        <div class="footer-col"><h4>Navegación</h4><ul>
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="catalogo.html">Catálogo</a></li>
+          <li><a href="servicios.html">Servicios</a></li>
+          <li><a href="nosotros.html">Nosotros</a></li>
+          <li><a href="contacto.html">Contacto</a></li>
+        </ul></div>
+        <div class="footer-col"><h4>Contacto</h4><ul>
+          <li><a href="tel:+59846343775">📞 4634 3775</a></li>
+          <li><a href="https://wa.me/59899364330">💬 099 364 330</a></li>
+          <li><a href="contacto.html">📍 Inés Duran 1181, Trinidad</a></li>
+          <li style="color:rgba(255,255,255,.4);font-size:.82rem">Lun–Vie: 8:30–18:30<br>Sáb: 9:00–13:00</li>
+        </ul></div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2026 Cuevas Automóviles – Eduardo Benicio Cuevas Ferrari. Todos los derechos reservados.</p>
+    </div>
+  </div>
+</footer>
+
+<div class="whatsapp-float">
+  <div class="whatsapp-tooltip">¡Consultanos!</div>
+  <a href="https://wa.me/59899364330?text=Hola!%20Vengo%20desde%20la%20web%20de%20Cuevas%20y%20quisiera%20consultar" target="_blank" class="whatsapp-bubble">
+    <div class="whatsapp-pulse"></div>
+    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/></svg>
+  </a>
+</div>
+
+<script src="js/main.js"></script>
+</body>
+</html>
