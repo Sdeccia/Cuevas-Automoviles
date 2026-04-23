@@ -13,15 +13,16 @@
   --black:      #0A0A0A;
   --black-dark: #000000;
   --black-mid:  #111827;
-  --blue:       #2563EB;
-  --blue-dark:  #1D4ED8;
-  --blue-light: #60A5FA;
+  --blue:        #2563EB;
+  --blue-dark:   #1D4ED8;
+  --blue-light:  #60A5FA;
+  /* Color de marca: azul vívido legible sobre fondos oscuros */
   --white:      #FFFFFF;
   --light:      #F8FAFC;
   --light-mid:  #E2E8F0;
   --grey:       #94A3B8;
   --grey-dark:  #475569;
-  --text:       #1E293B;
+  --text:       #05030c;
 
   --shadow-sm:  0 2px 8px rgba(0,0,0,.06);
   --shadow-md:  0 8px 24px rgba(0,0,0,.1);
@@ -60,6 +61,11 @@ h1, h2, h3, h4, h5, h6 { font-weight: 700; line-height: 1.2; color: var(--black)
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+}
+
+/* Clase global para resaltar el nombre de marca en headings */
+.highlight {
+  color: var(--blue-dark);
 }
 
 /* ── LAYOUT ───────────────────────────────────────────────── */
@@ -245,7 +251,7 @@ h1, h2, h3, h4, h5, h6 { font-weight: 700; line-height: 1.2; color: var(--black)
 .mobile-nav {
   display: none;
   position: fixed;
-  top: 72px; left: 0; right: 0;
+  top: 140px; left: 0; right: 0;
   background: rgba(10,10,10,.98);
   backdrop-filter: blur(20px);
   z-index: 999;
@@ -253,18 +259,23 @@ h1, h2, h3, h4, h5, h6 { font-weight: 700; line-height: 1.2; color: var(--black)
   flex-direction: column;
   gap: 4px;
   border-top: 1px solid rgba(255,255,255,.1);
+  max-height: calc(100vh - 140px);
+  overflow-y: auto;
 }
 .mobile-nav.open { display: flex; }
 .mobile-nav a {
-  padding: 12px 16px;
+  padding: 14px 16px;
   border-radius: var(--radius-sm);
   font-size: 1rem;
   font-weight: 500;
   color: rgba(255,255,255,.85);
   transition: var(--transition);
+  min-height: 48px;
+  display: flex;
+  align-items: center;
 }
 .mobile-nav a:hover { background: rgba(255,255,255,.1); color: var(--white); }
-.mobile-nav .btn { margin-top: 12px; justify-content: center; }
+.mobile-nav .btn { margin-top: 12px; justify-content: center; min-height: 48px; }
 
 /* ── HERO ─────────────────────────────────────────────────── */
 .hero {
@@ -289,7 +300,7 @@ h1, h2, h3, h4, h5, h6 { font-weight: 700; line-height: 1.2; color: var(--black)
 .hero-bg-image {
   position: absolute;
   inset: -20px;
-  background: url('../foto frente local.PNG') center/cover no-repeat;
+  background: url('../src/foto frente local.PNG') center/cover no-repeat;
   z-index: 0;
   filter: blur(3px) brightness(0.4);
   transform: scale(1.06);
@@ -345,12 +356,7 @@ h1, h2, h3, h4, h5, h6 { font-weight: 700; line-height: 1.2; color: var(--black)
   margin-bottom: 20px;
   letter-spacing: -.02em;
 }
-.hero-title .highlight {
-  background: linear-gradient(135deg, var(--blue) 0%, var(--blue-light) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
+/* .hero-title .highlight — usa la clase global .highlight definida arriba */
 
 .hero-desc {
   font-size: 1.1rem;
@@ -414,6 +420,8 @@ h1, h2, h3, h4, h5, h6 { font-weight: 700; line-height: 1.2; color: var(--black)
   text-transform: uppercase;
 }
 .scroll-arrow { width: 28px; height: 28px; border: 1.5px solid rgba(255,255,255,.3); border-radius: 50%; display: flex; align-items: center; justify-content: center; animation: bounce 2s infinite; }
+a.hero-scroll:hover { color: rgba(255,255,255,.85); }
+a.hero-scroll:hover .scroll-arrow { border-color: rgba(255,255,255,.7); }
 @keyframes bounce { 0%,100%{ transform:translateY(0); } 50%{ transform:translateY(6px); } }
 
 /* ── FEATURED VEHICLES ────────────────────────────────────── */
@@ -1068,6 +1076,45 @@ footer {
 .breadcrumb .sep { color: rgba(255,255,255,.3); font-size: .75rem; }
 .breadcrumb .current { font-size: .82rem; color: rgba(255,255,255,.75); }
 
+/* ── BRAND FILTER BADGE ───────────────────────────────────── */
+.brand-filter-badge {
+  display: none;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px;
+  background: rgba(37,99,235,.07);
+  border: 1.5px solid rgba(37,99,235,.22);
+  border-radius: var(--radius);
+  font-size: .88rem;
+  color: var(--grey-dark);
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+.brand-filter-badge.active { display: flex; }
+.brand-filter-badge .bf-label { color: var(--grey-dark); }
+.brand-filter-badge .bf-name {
+  color: var(--blue);
+  font-weight: 700;
+  font-size: .95rem;
+}
+.brand-filter-badge .bf-clear {
+  margin-left: auto;
+  padding: 4px 14px;
+  border-radius: 100px;
+  font-size: .8rem;
+  font-weight: 600;
+  color: var(--blue);
+  border: 1.5px solid var(--blue);
+  background: transparent;
+  cursor: pointer;
+  transition: var(--transition);
+  white-space: nowrap;
+}
+.brand-filter-badge .bf-clear:hover {
+  background: var(--blue);
+  color: var(--white);
+}
+
 /* ── PAGINATION ───────────────────────────────────────────── */
 .pagination { display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 48px; }
 .page-btn {
@@ -1138,6 +1185,11 @@ footer {
   .nav-hamburger { display: flex; }
   .cta-inner { flex-direction: column; text-align: center; }
   .cta-actions { justify-content: center; }
+  /* Navbar compacto en mobile */
+  .nav-inner { height: 80px; }
+  .nav-logo img { height: 64px; }
+  .mobile-nav { top: 80px; max-height: calc(100vh - 80px); }
+  .nav-hamburger { padding: 10px; min-width: 44px; min-height: 44px; justify-content: center; }
 }
 
 @media (max-width: 480px) {

@@ -13,7 +13,7 @@
 <nav id="navbar" class="solid">
   <div class="nav-inner">
     <a href="index.html" class="nav-logo">
-      <img src="logo cuevas.png" alt="Cuevas Logo">
+      <img src="src/logo cuevas.png" alt="Cuevas Logo">
       <div class="nav-logo-text">
         <span class="brand">CUEVAS</span>
         <span class="tagline">Automóviles · Trinidad</span>
@@ -149,8 +149,6 @@
             <label for="filterSort" style="font-size:.85rem">Ordenar:</label>
             <select id="filterSort">
               <option value="featured">Destacados</option>
-              <option value="price-asc">Precio: menor a mayor</option>
-              <option value="price-desc">Precio: mayor a menor</option>
               <option value="year-desc">Año: más nuevo</option>
               <option value="year-asc">Año: más antiguo</option>
               <option value="km-asc">Menor kilometraje</option>
@@ -159,6 +157,7 @@
         </div>
       </div>
 
+      <div id="brandFilterBadge" class="brand-filter-badge" role="status" aria-live="polite"></div>
       <div id="catalogGrid" class="catalog-grid"></div>
       <div id="pagination" class="pagination"></div>
     </div>
@@ -171,7 +170,7 @@
     <div class="container">
       <div class="footer-grid">
         <div class="footer-brand">
-            <img src="logo cuevas.png" alt="Cuevas Logo" class="footer-logo" style="height: 60px; filter: brightness(0) invert(1); margin-bottom: 20px;">
+            <img src="src/logo cuevas.png" alt="Cuevas Logo" class="footer-logo" style="height: 60px; filter: brightness(0) invert(1); margin-bottom: 20px;">
           <p class="desc">Tu concesionaria de confianza en Trinidad, Flores. Más de 36 años en el mercado uruguayo.</p>
         </div>
         <div class="footer-col">
@@ -186,9 +185,9 @@
         <div class="footer-col">
           <h4>Marcas</h4>
           <ul>
-            <li><a href="catalogo.html?brand=Toyota">Toyota</a></li>
-            <li><a href="catalogo.html?brand=Chevrolet">Chevrolet</a></li>
-            <li><a href="catalogo.html?brand=Ford">Ford</a></li>
+            <li><a href="catalogo.html?marca=Toyota">Toyota</a></li>
+            <li><a href="catalogo.html?marca=Chevrolet">Chevrolet</a></li>
+            <li><a href="catalogo.html?marca=Ford">Ford</a></li>
             <li><a href="marcas.html">Ver todas</a></li>
           </ul>
         </div>
@@ -221,16 +220,6 @@
 
 <script src="js/main.js"></script>
 <script src="js/catalogo.js"></script>
-<script>
-// Pre-select brand from URL param
-const urlParams = new URLSearchParams(window.location.search);
-const brandParam = urlParams.get('brand');
-if (brandParam && document.getElementById('filterBrand')) {
-  setTimeout(() => {
-    document.getElementById('filterBrand').value = brandParam;
-    applyFilters?.();
-  }, 100);
-}
-</script>
+<!-- La lectura de ?marca= y el primer render están en js/catalogo.js (sección INIT) -->
 </body>
 </html>

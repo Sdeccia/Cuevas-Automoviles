@@ -20,6 +20,7 @@ const cars = [
   { id:14, brand:'BMW',       model:'Serie 3',      year:2022, price:62000, km:22000,   fuel:'Nafta',    trans:'Automático', color:'Azul',    img:'https://images.unsplash.com/photo-1555215695-3004980ad54e?w=600', badge:'Premium',    featured:false },
   { id:15, brand:'Chevrolet', model:'Tracker',      year:2023, price:27000, km:4000,    fuel:'Nafta',    trans:'Automático', color:'Blanco',  img:'https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=600', badge:'Nuevo',      featured:false },
   { id:16, brand:'Toyota',    model:'SW4',          year:2022, price:55000, km:28000,   fuel:'Diesel',   trans:'Automático', color:'Blanco',  img:'https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=600', badge:'',           featured:false },
+  { id:17, brand:'Volvo',     model:'XC60',         year:2022, price:58000, km:19000,   fuel:'Nafta',    trans:'Automático', color:'Gris',    img:'https://images.unsplash.com/photo-1544636331-e26879cd4d9b?w=600', badge:'Premium',    featured:false },
 ];
 
 // ── STATE ─────────────────────────────────────────────────────
@@ -51,6 +52,43 @@ if (filterBrand) {
   });
 }
 
+// ── URL SYNC ──────────────────────────────────────────────────
+// Equivalente vanilla a setSearchParams() de React Router.
+// Mantiene ?marca= sincronizado con el filtro activo sin recargar la página.
+function syncBrandToURL(brand) {
+  const url = new URL(window.location.href);
+  if (brand) {
+    url.searchParams.set('marca', brand);
+  } else {
+    url.searchParams.delete('marca');
+  }
+  history.replaceState({ marca: brand }, '', url);
+}
+
+// ── BRAND BADGE ───────────────────────────────────────────────
+// Muestra/oculta el indicador visual de filtro activo.
+function renderBrandBadge(brand) {
+  const badge = document.getElementById('brandFilterBadge');
+  if (!badge) return;
+  if (!brand) {
+    badge.classList.remove('active');
+    badge.innerHTML = '';
+    return;
+  }
+  badge.classList.add('active');
+  badge.innerHTML = `
+    <span class="bf-label">Mostrando resultados para:</span>
+    <span class="bf-name">${brand}</span>
+    <button class="bf-clear" onclick="clearBrandFilter()" aria-label="Quitar filtro de marca">✕ Quitar filtro</button>
+  `;
+}
+
+// Función pública para quitar el filtro de marca desde el badge.
+window.clearBrandFilter = function () {
+  if (filterBrand) filterBrand.value = '';
+  applyFilters();
+};
+
 // ── FILTER LOGIC ──────────────────────────────────────────────
 function applyFilters() {
   const brand    = filterBrand?.value || '';
@@ -63,17 +101,23 @@ function applyFilters() {
   const search   = searchInput?.value.toLowerCase().trim() || '';
   const sort     = filterSort?.value || 'featured';
 
+  // DEBUG: equivalente a console.log("Marca desde URL:", marca) de React
+  console.log('[Catálogo] Marca activa:', brand || '(todas)');
+  console.log('[Catálogo] Total autos en base:', cars.length);
+
   filtered = cars.filter(c => {
-    if (brand  && c.brand !== brand)      return false;
-    if (fuel   && c.fuel  !== fuel)       return false;
-    if (trans  && c.trans !== trans)      return false;
+    // Bug fix: comparación case-insensitive → "fiat" == "Fiat"
+    if (brand && c.brand.toLowerCase() !== brand.toLowerCase()) return false;
+    if (fuel  && c.fuel  !== fuel)       return false;
+    if (trans && c.trans !== trans)      return false;
     if (c.year < yearMin || c.year > yearMax)    return false;
     if (c.price < priceMin || c.price > priceMax)return false;
     if (search && !`${c.brand} ${c.model} ${c.year}`.toLowerCase().includes(search)) return false;
     return true;
   });
 
-  // Sort
+  console.log('[Catálogo] Resultados filtrados:', filtered.length);
+
   switch (sort) {
     case 'price-asc':  filtered.sort((a,b) => a.price - b.price); break;
     case 'price-desc': filtered.sort((a,b) => b.price - a.price); break;
@@ -84,6 +128,8 @@ function applyFilters() {
   }
 
   currentPage = 1;
+  syncBrandToURL(brand);
+  renderBrandBadge(brand);
   renderGrid();
   renderPagination();
 }
@@ -126,13 +172,9 @@ function renderGrid() {
           <div class="spec-item"><span class="ic">🛣️</span>${c.km.toLocaleString('es-UY')} km</div>
         </div>
         <div class="vehicle-card-footer">
-          <div class="vehicle-price">
-            <span class="currency">USD</span>
-            <span class="amount">${c.price.toLocaleString('es-UY')}</span>
-          </div>
-          <a href="https://wa.me/59899000000?text=Hola!%20Consulto%20por%20el%20${encodeURIComponent(c.brand+' '+c.model+' '+c.year)}"
-             target="_blank" class="btn btn-primary btn-sm" onclick="event.stopPropagation()">
-            Consultar
+          <a href="https://wa.me/59899364330?text=Hola!%20Consulto%20por%20el%20${encodeURIComponent(c.brand+' '+c.model+' '+c.year)}"
+             target="_blank" class="btn btn-primary btn-sm" style="width:100%;justify-content:center" onclick="event.stopPropagation()">
+            Consultar precio
           </a>
         </div>
       </div>
@@ -193,4 +235,26 @@ function debounce(fn, wait) {
 }
 
 // ── INIT ──────────────────────────────────────────────────────
-if (catalogGrid) applyFilters();
+// Lee ?marca= ANTES del primer applyFilters(), si no, syncBrandToURL('')
+// borra el param de la URL antes de que pueda ser leído.
+if (catalogGrid) {
+  const marcaURL = new URLSearchParams(window.location.search).get('marca');
+  console.log('[Catálogo] Marca desde URL:', marcaURL || '(ninguna)');
+
+  if (marcaURL && filterBrand) {
+    // Buscar option case-insensitive
+    let opt = Array.from(filterBrand.options).find(
+      o => o.value.toLowerCase() === marcaURL.toLowerCase()
+    );
+    // Si la marca no tiene autos (JAC, Mitsubishi…) no existe en el select → agregarla
+    if (!opt) {
+      opt = document.createElement('option');
+      opt.value = marcaURL;
+      opt.textContent = marcaURL;
+      filterBrand.appendChild(opt);
+    }
+    filterBrand.value = opt.value;
+  }
+
+  applyFilters(); // Ahora filterBrand.value ya está seteado correctamente
+}
