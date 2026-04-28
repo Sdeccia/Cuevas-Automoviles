@@ -68,6 +68,9 @@ h1, h2, h3, h4, h5, h6 { font-weight: 700; line-height: 1.2; color: var(--black)
   color: var(--blue-dark);
 }
 
+/* Phosphor Icons — alineación vertical con texto adyacente */
+i.ph { vertical-align: -0.125em; }
+
 /* ── LAYOUT ───────────────────────────────────────────────── */
 .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
 .section   { padding: 96px 0; }

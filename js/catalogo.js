@@ -166,10 +166,10 @@ function renderGrid() {
         <div class="vehicle-card-brand">${c.brand}</div>
         <div class="vehicle-card-name">${c.model} ${c.year}</div>
         <div class="vehicle-card-specs">
-          <div class="spec-item"><span class="ic">📅</span>${c.year}</div>
-          <div class="spec-item"><span class="ic">⛽</span>${c.fuel}</div>
-          <div class="spec-item"><span class="ic">⚙️</span>${c.trans}</div>
-          <div class="spec-item"><span class="ic">🛣️</span>${c.km.toLocaleString('es-UY')} km</div>
+          <div class="spec-item"><span class="ic"><i class="ph ph-calendar"></i></span>${c.year}</div>
+          <div class="spec-item"><span class="ic"><i class="ph ph-gas-pump"></i></span>${c.fuel}</div>
+          <div class="spec-item"><span class="ic"><i class="ph ph-gear"></i></span>${c.trans}</div>
+          <div class="spec-item"><span class="ic"><i class="ph ph-road"></i></span>${c.km.toLocaleString('es-UY')} km</div>
         </div>
         <div class="vehicle-card-footer">
           <a href="https://wa.me/59899364330?text=Hola!%20Consulto%20por%20el%20${encodeURIComponent(c.brand+' '+c.model+' '+c.year)}"
